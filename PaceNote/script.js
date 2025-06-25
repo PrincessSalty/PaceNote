@@ -72,17 +72,28 @@ function loadRuns() {
 }
 
 function deleteRun(runId) {
-    let runs = JSON.parse(localStorage.getItem('runs')) || [];
-    runs = runs.filter(run => run.id !== runId);
-    localStorage.setItem('runs', JSON.stringify(runs));
-    loadRuns()
+    const runs = JSON.parse(localStorage.getItem('runs')) || [];
+    const updatedRuns = runs.filter(run => run.id !== runId);
+    localStorage.setItem('runs', JSON.stringify(updatedRuns));
+
+    const runCards = document.querySelectorAll('.run-card');
+    runCards.forEach(card => {
+        const deleteBtn = card.querySelector('.delete-btn');
+        if (deleteBtn && deleteBtn.getAttribute('onclick') === `deleteRun(${runId})`) {
+            card.classList.add('fade-out');
+            card.addEventListener('animationend', () => {
+                card.remove();
+                if (updatedRuns.length === 0) loadRuns();
+            });
+        }
+    });
 }
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closeOverlay()
     }
-})
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     loadRuns();

@@ -13,7 +13,8 @@
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="" class="navbar-logo">PaceNote</a>
+            <a class="navbar-logo"
+                onclick="document.getElementById('logruns').scrollIntoView({ behavior: 'smooth'})">PaceNote</a>
             <ul class="navbar-buttons">
                 <li><a onclick="document.getElementById('runs').scrollIntoView({ behavior: 'smooth'})">Your Runs</a>
                 </li>
@@ -21,15 +22,21 @@
                 </li>
                 <li><a onclick="document.getElementById('About').scrollIntoView({ behavior: 'smooth'})">About</a></li>
             </ul>
+            <ul class="navbar-buttons-right">
+                <li><a>Log in</a></li>
+                <li><a>Sign in</a></li>
+            </ul>
         </div>
     </nav>
 
-    <section class="hero-section">
+    <section class="hero-section" id="logruns">
         <div class="hero-content">
             <h1 class="hero-title">Track Every Step</h1>
             <p class="hero-subtitle">Elevate your running experience with PaceNote.</p>
         </div>
         <button class="logrunbutton" onclick="openLogGui()">Log a Run</button>
+        <p class="hero-subtitle">or plan one</p>
+        <button class="planbutton" onclick="openPlanGui()">Plan a Run</button>
     </section>
 
     <div id="overlay" class="overlay" onclick="closeOverlay(event)">
